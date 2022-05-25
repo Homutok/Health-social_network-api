@@ -11,6 +11,7 @@ class Fitness(models.Model):
     fitness_present = models.ImageField(upload_to='', height_field=None, width_field=None, max_length=100, null=True,
                                         blank=True)
     fitness_author = models.ForeignKey(User, on_delete=models.PROTECT, default=1, related_name='fitness_for_user')
+    fitness_preview = models.ImageField(null=True)
 
     def __str__(self):
         return self.fitness_name

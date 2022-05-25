@@ -19,6 +19,7 @@ class Food(models.Model):
     food_summary = models.CharField(null=True, max_length=500, db_index=True)
     food_ingredient_summary = models.CharField(null=True, max_length=500, db_index=True)
     food_author = models.ForeignKey(User, on_delete=models.PROTECT, default=1, related_name='food_for_user')
+    food_preview = models.ImageField(null=True)
 
     def __str__(self):
         return self.food_name
