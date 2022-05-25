@@ -16,10 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
+
 from Purpose.views import PurposeViewSet
-from Blog.views import PostViewSet, FoodViewSet
+from Blog.views import PostViewSet
 from Person.views import PersonViewSet
+from Recipe.views import FoodViewSet
+
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
+
+
 
 router = routers.DefaultRouter()
 router.register(r'Blog', PostViewSet)
