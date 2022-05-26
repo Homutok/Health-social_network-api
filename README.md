@@ -29,7 +29,7 @@ python manage.py  createsuperuser
 python manage.py runserver
 ```
 
-Для загрузки данных в таблицу "Еда", которая содержит данные о продукте (опционально, т.к. занимает ~20 минут) :
+Для загрузки данных в таблицу "Еда", которая содержит данные о продуктах (опционально, т.к. занимает ~20 минут) :
 ```bash
 python manage.py load_food_data .\files\FoodData_Central.json
 ```
@@ -37,14 +37,19 @@ python manage.py load_food_data .\files\FoodData_Central.json
 <hr>
 <h3>Просмотр проекта</h3>
 Проект запускается по адресу:
+
 ```bash
 http://127.0.0.1:8000/
 ```
+
 Просмотр api составляющей:
+
 ```bash
 http://127.0.0.1:8000/api/
 ```
+
 Панель администратора:
+
 ```bash
 http://127.0.0.1:8000/admin/
 ```
