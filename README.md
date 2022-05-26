@@ -1,4 +1,4 @@
-<h2 align="center">Api для дипломного проекта - Health-social_network-api</h2>
+<h2 align="center">Health-social_network-api - Api для дипломного проекта</h2>
 Проект написан в рамках дипломной работы по созданию социальной сети.
 
 - Расширенный пользователь
@@ -13,3 +13,8 @@
 - Дневник питания:
   - Калькулятор каллорий
 - И т.д.
+- 
+```bash
+pip install -r requirements.txt
+python manage.py  createsuperuser
+```
