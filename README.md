@@ -14,9 +14,11 @@
 - Дневник питания:
   - Калькулятор каллорий
 - И т.д.
+
 <hr>
 <h3>Команды для запуска проекта</h3>
 Для первоначальной настройки проекта:
+
 ```bash
 pip install -r requirements.txt
 python manage.py  createsuperuser
@@ -35,12 +37,15 @@ python manage.py load_food_data .\files\FoodData_Central.json
 <hr>
 <h3>Просмотр проекта</h3>
 Проект запускается по адресу:
+```bash
 http://127.0.0.1:8000/
-
+```
 Просмотр api составляющей:
+```bash
 http://127.0.0.1:8000/api/
-
-
+```
 Панель администратора:
+```bash
 http://127.0.0.1:8000/admin/
+```
 
