@@ -48,7 +48,9 @@ PROJECT_APPS = [
     'Nutrients',
     'Fitness',
     'Comments',
-    'Favourite'
+    'Favourite',
+    'UserWorkout',
+    'UserDiet'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
