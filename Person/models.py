@@ -5,7 +5,7 @@ from django_countries.fields import CountryField
 # Create your models here.
 class Person(models.Model):
     person_name = models.CharField(max_length=100, db_index=True)  # Имя пользователя
-    person_photo = models.ImageField(upload_to='article', height_field=None, width_field=None, max_length=100,
+    person_photo = models.ImageField(upload_to='article/profile_photo', height_field=None, width_field=None, max_length=100,
                                      null=True,
                                      blank=True)  # Фотография пользователя
     date_of_birth = models.DateField(null=True, blank=True)  # Дата рождения

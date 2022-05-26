@@ -1,7 +1,7 @@
 from rest_framework.fields import SerializerMethodField
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.serializers import ModelSerializer, StringRelatedField, SlugRelatedField
-from .models import Post
+from .models import Post, Like
 
 
 class PostSerializer(ModelSerializer):
@@ -25,3 +25,12 @@ class PostSerializer(ModelSerializer):
     class Meta:
         model = Post
         fields = '__all__'
+
+
+class LikeSerializer(ModelSerializer):
+    # user = StringRelatedField()
+
+    class Meta:
+        model = Like
+        fields = ['id', 'content_id']
+        # fields = '__all__'
