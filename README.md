@@ -13,8 +13,14 @@
 - Дневник питания:
   - Калькулятор каллорий
 - И т.д.
-- 
+
+Для первоначальной настройки проекта:
 ```bash
 pip install -r requirements.txt
 python manage.py  createsuperuser
+```
+
+Для запуска проекта:
+```bash
+python manage.py runserver
 ```
