@@ -1,10 +1,10 @@
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.serializers import ModelSerializer, StringRelatedField, SlugRelatedField
-from .models import Fitness
+from .models import ToDoTask
 
 
-class FitnessSerializer(ModelSerializer):
+class ToDoSerializer(ModelSerializer):
+
     class Meta:
-        model = Fitness
-        # fields = ['comment_post', 'comment_text']
+        model = ToDoTask
         fields = '__all__'

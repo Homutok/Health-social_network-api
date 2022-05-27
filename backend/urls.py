@@ -17,20 +17,19 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from Purpose.views import PurposeViewSet
-from Blog.views import PostViewSet
-from Person.views import PersonViewSet
-from Recipe.views import FoodViewSet
-
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
-
+from Blog.views import BlogViewList, BlogViewDetail, LikeViewSet, TagViewSet
+from Favourite.views import FavouriteViewList
+from Fitness.views import FitnessViewList
+from ToDo.views import ToDoViewSet
+from UserDiet.views import DietViewSet
+from UserWorkout.views import WorkoutViewSet
 
 router = routers.DefaultRouter()
-router.register(r'Blog', PostViewSet)
-router.register(r'Food', FoodViewSet)
-router.register(r'Person', PersonViewSet)
-router.register(r'Purpose', PurposeViewSet)
+router.register(r'Likes', LikeViewSet)
+router.register(r'Tags', TagViewSet)
+router.register(r'Fitness', FitnessViewList)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,4 +38,15 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+]
+urlpatterns += [
+    path('api/Blog/', BlogViewList.as_view()),
+    path('api/Blog/<int:pk>/', BlogViewDetail.as_view()),
+]
+urlpatterns += [
+    path('api/Favourite/', FavouriteViewList.as_view()),
+    path('api/ToDO/', ToDoViewSet.as_view()),
+    path('api/Diets/', DietViewSet.as_view()),
+    path('api/Workouts/', WorkoutViewSet.as_view()),
+    # path('api/Blog/<int:pk>/', BlogViewDetail.as_view()),
 ]
