@@ -1,11 +1,13 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django_countries.fields import CountryField
 
 
 # Create your models here.
 class Person(models.Model):
-    person_name = models.CharField(max_length=100, db_index=True)  # Имя пользователя
-    person_photo = models.ImageField(upload_to='article/profile_photo', height_field=None, width_field=None, max_length=100,
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE, related_name='public_user_info')
+    person_photo = models.ImageField(upload_to='article/profile_photo', height_field=None, width_field=None,
+                                     max_length=100,
                                      null=True,
                                      blank=True)  # Фотография пользователя
     date_of_birth = models.DateField(null=True, blank=True)  # Дата рождения
@@ -26,10 +28,10 @@ class Person(models.Model):
     person_height = models.IntegerField(null=True, blank=True)
 
     class Meta:
-        ordering = ['person_name']
+        ordering = ['user']
 
     def __str__(self):
-        return self.person_name
+        return str(self.user.username)
 
 
 class PersonHealth(models.Model):

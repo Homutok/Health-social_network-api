@@ -19,12 +19,13 @@ from rest_framework import routers
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
-from Blog.views import BlogViewList, BlogViewDetail, LikeViewSet, TagViewSet
+from Blog.views import PostLikeView, BlogViewList, BlogViewDetail, LikeViewSet, TagViewSet
 from Favourite.views import FavouriteViewList
 from Fitness.views import FitnessViewList
 from ToDo.views import ToDoViewSet
 from UserDiet.views import DietViewSet
 from UserWorkout.views import WorkoutViewSet
+from Person.views import MyUserDetail, UserViewSet, UserDetail
 
 router = routers.DefaultRouter()
 router.register(r'Likes', LikeViewSet)
@@ -42,6 +43,14 @@ urlpatterns = [
 urlpatterns += [
     path('api/Blog/', BlogViewList.as_view()),
     path('api/Blog/<int:pk>/', BlogViewDetail.as_view()),
+]
+urlpatterns += [
+    path('api/Liked/<int:pk>/', PostLikeView.as_view()),
+]
+urlpatterns += [
+    path('api/MyProfile/', MyUserDetail.as_view()),
+    path('api/Profile/', UserViewSet.as_view()),
+    path('api/Profile/<int:pk>/', UserDetail.as_view()),
 ]
 urlpatterns += [
     path('api/Favourite/', FavouriteViewList.as_view()),

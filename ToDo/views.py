@@ -11,3 +11,8 @@ class ToDoViewSet(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
         return ToDoTask.objects.filter(user=user)
+
+    def perform_create(self, serializer):
+        serializer.save(
+            task_author=self.request.user
+        )

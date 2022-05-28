@@ -3,6 +3,9 @@ from .serializers import PostSerializer, BlogSerializer, LikeSerializer, TagSeri
 import datetime
 from rest_framework import permissions, filters, generics
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.shortcuts import get_object_or_404, render
 
 
 class ResponseCode:
@@ -44,6 +47,15 @@ class LikeViewSet(ModelViewSet):
         serializer.save(
             user=self.request.user
         )
+
+
+class PostLikeView(APIView):
+    serializer_class = LikeSerializer
+    pagination_class = None
+
+    def get(self, request, pk, *args, **kwargs):
+        items = get_object_or_404(Like, user=self.request.user, content_id=self.kwargs.get('pk'))
+        return Response(data={"detail": True})
 
 
 class TagViewSet(ModelViewSet):

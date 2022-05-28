@@ -10,8 +10,8 @@ class Post(models.Model):
     post_author = models.ForeignKey(User, null=True, on_delete=models.PROTECT, related_name='post_for_user')
     post_date = models.DateField(null=True, blank=True)
     post_tags = models.ManyToManyField('Tags')
-    post_recipes = models.ManyToManyField(Recipe, null=True, blank=True)
-    post_fitness = models.ManyToManyField(Fitness, null=True, blank=True)
+    post_recipes = models.ManyToManyField(Recipe, blank=True)
+    post_fitness = models.ManyToManyField(Fitness, blank=True)
 
     ALL = 'all'
     FITNESS = 'fitness'
