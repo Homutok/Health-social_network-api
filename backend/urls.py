@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
@@ -25,7 +26,9 @@ from Fitness.views import FitnessViewList
 from ToDo.views import ToDoViewSet
 from UserDiet.views import DietViewSet
 from UserWorkout.views import WorkoutViewSet
-from Person.views import MyUserDetail, UserViewSet, UserDetail
+from Person.views import MyUserDetail, UserViewSet, UserDetail, PhotoListView
+
+from backend import settings
 
 router = routers.DefaultRouter()
 router.register(r'Likes', LikeViewSet)
@@ -48,14 +51,17 @@ urlpatterns += [
     path('api/Liked/<int:pk>/', PostLikeView.as_view()),
 ]
 urlpatterns += [
+    path('api/Image/', PhotoListView.as_view()),
+]
+urlpatterns += [
     path('api/MyProfile/', MyUserDetail.as_view()),
     path('api/Profile/', UserViewSet.as_view()),
     path('api/Profile/<int:pk>/', UserDetail.as_view()),
 ]
 urlpatterns += [
     path('api/Favourite/', FavouriteViewList.as_view()),
-    path('api/ToDO/', ToDoViewSet.as_view()),
+    path('api/ToDo/', ToDoViewSet.as_view()),
     path('api/Diets/', DietViewSet.as_view()),
     path('api/Workouts/', WorkoutViewSet.as_view()),
-    # path('api/Blog/<int:pk>/', BlogViewDetail.as_view()),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
