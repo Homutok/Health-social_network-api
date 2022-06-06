@@ -12,9 +12,9 @@ class Nutrients(models.Model):
 
 
 class FoodNutrients(models.Model):
-    food = models.ForeignKey(Food, on_delete=models.PROTECT, null=True, related_name='nutrients_for_food')
+    food = models.ForeignKey(Food, on_delete=models.CASCADE, null=True, related_name='nutrients_for_food')
     amount = models.FloatField(null=True, blank=True)
-    nutrientInfo = models.ForeignKey(Nutrients, on_delete=models.PROTECT, null=True, related_name='nutrients_for_food')
+    nutrientInfo = models.ForeignKey(Nutrients, on_delete=models.PROTECT, null=True, related_name='nutrients')
 
     def __str__(self):
         return str(self.nutrientInfo.nutrient_name) + " " + str(self.amount) + " " + str(

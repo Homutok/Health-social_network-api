@@ -2,9 +2,9 @@ from django.contrib.auth.models import User
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django_countries.fields import CountryField
+from Achievement.models import Achievement
 
 
-# Create your models here.
 class Person(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE, related_name='public_user_info')
     date_of_birth = models.DateField(null=True, blank=True)  # Дата рождения
@@ -34,9 +34,10 @@ class Person(models.Model):
 
 
 class PersonHealth(models.Model):
-    persons_data = models.ForeignKey('Person', on_delete=models.PROTECT, null=True, related_name='health_for_user')
+    persons_data = models.ForeignKey(User, on_delete=models.PROTECT, null=True, related_name='health_for_user')
     date_of_check = models.DateField(null=True, blank=True)
     person_weight = models.IntegerField(null=True, blank=True)
+    person_dream = models.IntegerField(null=True, blank=True)
     person_pulse = models.IntegerField(null=True, blank=True)
     person_steps_per_day = models.IntegerField(null=True, blank=True)
 
@@ -56,3 +57,11 @@ class PersonPhoto(models.Model):
 
     def __str__(self):
         return self.person_photo.name
+
+
+class PersonAchievement(models.Model):
+    persons_data = models.ForeignKey(User, on_delete=models.CASCADE, related_name='achievement_for_user')
+    achievement_data = models.ForeignKey(Achievement, on_delete=models.CASCADE, related_name='achievements')
+
+    def __str__(self):
+        return str(self.persons_data)+'---'+str(self.achievement_data)

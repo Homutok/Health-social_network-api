@@ -5,9 +5,9 @@ from Nutrients.serializers import FoodNutrientsSerializer
 
 
 class FoodSerializer(ModelSerializer):
-    nutrients = StringRelatedField()
+    # nutrients = StringRelatedField()
     food_author = StringRelatedField()
-    nutrients_for_food = FoodNutrientsSerializer(many=True, required=False)
+    # nutrients_for_food = FoodNutrientsSerializer(many=True, required=False)
 
     class Meta:
         model = Food

@@ -5,6 +5,7 @@ from .models import FoodNutrients
 
 class FoodNutrientsSerializer(ModelSerializer):
     nutrientInfo = StringRelatedField()
+    food = StringRelatedField()
 
     class Meta:
         model = FoodNutrients

@@ -26,9 +26,11 @@ from Fitness.views import FitnessViewList
 from ToDo.views import ToDoViewSet
 from UserDiet.views import DietViewSet
 from UserWorkout.views import WorkoutViewSet
-from Person.views import MyUserDetail, UserViewSet, UserDetail, PhotoListView
-
+from Person.views import MyUserHealthLast, MyUserDetail, MyUserAchievements, UserViewSet, UserDetail, PhotoListView, MyUserHealthList
+from Recipe.views import FoodViewSet
+from Nutrients.views import FoodNutrientsViewList
 from backend import settings
+
 
 router = routers.DefaultRouter()
 router.register(r'Likes', LikeViewSet)
@@ -55,6 +57,9 @@ urlpatterns += [
 ]
 urlpatterns += [
     path('api/MyProfile/', MyUserDetail.as_view()),
+    path('api/MyAchievments/', MyUserAchievements.as_view()),
+    path('api/MyHealth/', MyUserHealthList.as_view()),
+    path('api/MyHealthLast/', MyUserHealthLast.as_view()),
     path('api/Profile/', UserViewSet.as_view()),
     path('api/Profile/<int:pk>/', UserDetail.as_view()),
 ]
@@ -63,5 +68,9 @@ urlpatterns += [
     path('api/ToDo/', ToDoViewSet.as_view()),
     path('api/Diets/', DietViewSet.as_view()),
     path('api/Workouts/', WorkoutViewSet.as_view()),
+]
+urlpatterns += [
+    path('api/Food/', FoodViewSet.as_view()),
+    path('api/FoodNutrient/', FoodNutrientsViewList.as_view()),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
