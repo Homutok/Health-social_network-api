@@ -17,6 +17,7 @@ class ResponseCode:
 class BlogViewList(generics.ListCreateAPIView):
     serializer_class = BlogSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    pagination_class = None
 
     def perform_create(self, serializer):
         serializer.save(

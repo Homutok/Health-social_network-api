@@ -12,6 +12,7 @@ class Post(models.Model):
     post_tags = models.ManyToManyField('Tags')
     post_recipes = models.ManyToManyField(Recipe, blank=True)
     post_fitness = models.ManyToManyField(Fitness, blank=True)
+    post_image = models.ImageField(upload_to='article/blog_images', null=True, blank=True)
 
     ALL = 'all'
     FITNESS = 'fitness'

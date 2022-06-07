@@ -13,7 +13,7 @@ class BlogSerializer(ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['id', 'post_name', 'post_summary', 'liked']
+        fields = ['id', 'post_name', 'post_summary', 'liked', 'post_image']
 
 
 class PostSerializer(ModelSerializer):
