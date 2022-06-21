@@ -26,6 +26,7 @@ class Post(models.Model):
                                  help_text='Тип '
                                            'новостей')
 
+
     def __str__(self):
         return self.post_name
 
@@ -40,7 +41,7 @@ class Tags(models.Model):
 class Like(models.Model):
     user = models.ForeignKey(User,
                              on_delete=models.CASCADE,
-                             related_name='likes')
+                             related_name='likes_users')
     content_id = models.ForeignKey(Post,
                                    on_delete=models.CASCADE,
                                    related_name='likes_for_post')

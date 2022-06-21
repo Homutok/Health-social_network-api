@@ -1,5 +1,5 @@
 from .models import Post, Like, Tags
-from .serializers import PostSerializer, BlogSerializer, LikeSerializer, TagSerializer
+from .serializers import PostSerializer, BlogSerializer, LikeSerializer, TagSerializer, LikeCreateSerializer
 import datetime
 from rest_framework import permissions, filters, generics
 from rest_framework.viewsets import ModelViewSet
@@ -17,19 +17,17 @@ class ResponseCode:
 class BlogViewList(generics.ListCreateAPIView):
     serializer_class = BlogSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ['post_type']
+    queryset = Post.objects.all()
     pagination_class = None
 
     def perform_create(self, serializer):
         serializer.save(
             post_author=self.request.user,
-            post_date=datetime.datetime.now())
-
-    def get_queryset(self):
-        queryset = Post.objects.all()
-        type = self.request.GET.get('type')
-        if type is not None:
-            queryset = queryset.filter(post_type=type)
-        return queryset
+            post_date=datetime.datetime.now(),
+            # post_tags=self.request.data['post_tags']
+        )
 
 
 class BlogViewDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -41,7 +39,7 @@ class LikeViewSet(ModelViewSet):
     search_fields = ['content_id']
     filter_backends = (filters.SearchFilter,)
     queryset = Like.objects.all()
-    serializer_class = LikeSerializer
+    serializer_class = LikeCreateSerializer
     pagination_class = None
 
     def perform_create(self, serializer):

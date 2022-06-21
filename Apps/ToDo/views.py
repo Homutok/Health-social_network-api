@@ -4,7 +4,7 @@ from .serializers import ToDoSerializer
 from rest_framework.permissions import IsAuthenticated
 
 
-class ToDoViewSet(generics.ListAPIView):
+class ToDoViewSet(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = ToDoSerializer
     pagination_class = None
@@ -17,3 +17,8 @@ class ToDoViewSet(generics.ListAPIView):
         serializer.save(
             task_author=self.request.user
         )
+
+
+class ToDoDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ToDoTask.objects.all()
+    serializer_class = ToDoSerializer

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from rest_framework.relations import PrimaryKeyRelatedField
 from django.contrib.auth.models import User
 from rest_framework.serializers import ModelSerializer, StringRelatedField
@@ -25,8 +27,27 @@ class UserSerializer(ModelSerializer):
     post_for_user = PrimaryKeyRelatedField(many=True, queryset=Post.objects.all())
     public_user_info = PersonSerializer()
 
-    # photo = PhotoSerializer()
-    # likes = LikeSerializer(many=True)
+    class Meta:
+        model = User
+        fields = '__all__'
+
+
+class UserUpdateSerializer(ModelSerializer):
+    class Meta:
+        model = Person
+        fields = '__all__'
+
+
+class CreateUserSerializer(ModelSerializer):
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            password=validated_data['password'],
+            date_joined=datetime.now()
+        )
+        profile = Person.create_profile(self, user)
+        return user
 
     class Meta:
         model = User

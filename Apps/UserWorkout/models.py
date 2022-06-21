@@ -16,9 +16,12 @@ DAY_OF_THE_WEEK = (
 # Create your models here.
 class Workout(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT, default=1, related_name='user_workout')
-    day = models.CharField(max_length=1, choices=DAY_OF_THE_WEEK, blank=True, default=1,
-                           help_text='День недели')
-    exercise = models.ForeignKey(Fitness, blank=True, on_delete=models.CASCADE, default=1,
-                                related_name='user_exercise')
+    day = models.IntegerField(max_length=10, choices=DAY_OF_THE_WEEK, blank=True, default=1,
+                              help_text='День недели')
+    exercise = models.ForeignKey(Fitness, blank=True, on_delete=models.CASCADE, null=True,
+                                 related_name='exercise_from_blog')
+    exercise_text = models.CharField(max_length=100, blank=True, null=True,
+                                     help_text='user_exercise')
+
     def __str__(self):
-        pass
+        return f"{self.user} - {self.id}"

@@ -4,6 +4,7 @@ from .models import Fitness
 
 
 class FitnessSerializer(ModelSerializer):
+
     class Meta:
         model = Fitness
         # fields = ['comment_post', 'comment_text']

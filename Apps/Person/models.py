@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.models import User
 from django.core.validators import FileExtensionValidator
 from django.db import models
@@ -6,10 +8,11 @@ from Achievement.models import Achievement
 
 
 class Person(models.Model):
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE, related_name='public_user_info')
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE, related_name='public_user_info')
     date_of_birth = models.DateField(null=True, blank=True)  # Дата рождения
-    summary = models.CharField(max_length=1000, db_index=True, null=True)  # Информация о пользователе
-    photo = models.ForeignKey('PersonPhoto', on_delete=models.SET_NULL, null=True, related_name='photo_for_user')
+    summary = models.CharField(max_length=1000, db_index=True, null=True, blank=True)  # Информация о пользователе
+    photo = models.ForeignKey('PersonPhoto', on_delete=models.SET_NULL, null=True, default=30,
+                              related_name='photo_for_user')
     MALE = 'male'
     FEMALE = 'female'
     OTHER = 'other'
@@ -18,13 +21,18 @@ class Person(models.Model):
         (FEMALE, 'Женщина'),
         (OTHER, 'Другие'),
     )
-    person_gender = models.CharField(max_length=50, choices=GENDER_CHOICE, blank=True, default='study',
+    person_gender = models.CharField(max_length=50, null=True, choices=GENDER_CHOICE, blank=True, default='other',
                                      help_text='Половая '
                                                'принадлежность')
-    country = CountryField()  # Страна проживания
+    country = CountryField(null=True, blank=True)  # Страна проживания
     person_height = models.IntegerField(null=True, blank=True)
-    place_of_study = models.CharField(max_length=1000, db_index=True, null=True)  # Информация о пользователе
+    place_of_study = models.CharField(max_length=1000, db_index=True, null=True,
+                                      blank=True)  # Информация о пользователе
     release_date = models.DateField(null=True, blank=True)  # Информация о пользователе
+
+    def create_profile(self, user):
+        new_person = Person(user=user, country='RU')
+        new_person.save()
 
     class Meta:
         ordering = ['user']
@@ -64,4 +72,4 @@ class PersonAchievement(models.Model):
     achievement_data = models.ForeignKey(Achievement, on_delete=models.CASCADE, related_name='achievements')
 
     def __str__(self):
-        return str(self.persons_data)+'---'+str(self.achievement_data)
+        return str(self.persons_data) + '---' + str(self.achievement_data)
